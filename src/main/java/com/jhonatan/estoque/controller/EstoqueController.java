@@ -1,5 +1,6 @@
 package com.jhonatan.estoque.controller;
 
+import com.jhonatan.estoque.model.Produto;
 import com.jhonatan.estoque.service.EstoqueService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,5 +49,9 @@ public class EstoqueController {
     @GetMapping("/movimentacoes/{produtoId}")
     public ResponseEntity<List<MovimentacaoEstoque>> listarMovimentacoesPorProduto(@PathVariable Long produtoId) {
         return ResponseEntity.ok(estoqueService.listarMovimentacoesPorProduto(produtoId));
+    }
+    @GetMapping("/abaixo-minimo")
+    public ResponseEntity<List<Produto>> listarProdutosAbaixoDoMinimo() {
+        return ResponseEntity.ok(estoqueService.listarProdutosAbaixoDoMinimo());
     }
 }

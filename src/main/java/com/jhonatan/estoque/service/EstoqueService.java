@@ -10,6 +10,7 @@ import java.util.List;
 import com.jhonatan.estoque.dto.MovimentacaoEstoqueRequest;
 
 
+
 @Service
 public class EstoqueService {
 
@@ -68,6 +69,13 @@ public class EstoqueService {
                 })
                 .sum();
     }
+    public List<Produto> listarProdutosAbaixoDoMinimo() {
+        return produtoService.listarProdutos()
+                .stream()
+                .filter(produto -> produto.getQuantidadeMinima() != null)
+                .filter(produto -> consultarSaldo(produto.getId()) < produto.getQuantidadeMinima())
+                .toList();
+    }
 
     public List<MovimentacaoEstoque> listarMovimentacoes() {
         return movimentacaoRepository.findAll();
@@ -77,4 +85,6 @@ public class EstoqueService {
         produtoService.buscarPorId(produtoId);
         return movimentacaoRepository.findByProdutoId(produtoId);
     }
+
+
 }
