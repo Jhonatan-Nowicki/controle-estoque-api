@@ -5,6 +5,8 @@ import com.jhonatan.estoque.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
 import com.jhonatan.estoque.exception.ConflitoException;
 import com.jhonatan.estoque.exception.RecursoNaoEncontradoException;
+import com.jhonatan.estoque.exception.RegraNegocioException;
+import com.jhonatan.estoque.repository.ProdutoRepository;
 
 import java.util.List;
 
@@ -12,9 +14,14 @@ import java.util.List;
 public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
+    private final ProdutoRepository produtoRepository;
 
-    public CategoriaService(CategoriaRepository categoriaRepository){
+    public CategoriaService(
+            CategoriaRepository categoriaRepository,
+            ProdutoRepository produtoRepository
+    ) {
         this.categoriaRepository = categoriaRepository;
+        this.produtoRepository = produtoRepository;
     }
 
     public Categoria criarCategoria(Categoria categoria){
@@ -50,6 +57,12 @@ public class CategoriaService {
     }
     public void desativarCategoria(Long id) {
         Categoria categoria = buscarPorId(id);
+
+        if (produtoRepository.existsByCategoriaIdAndAtivoTrue(id)) {
+            throw new RegraNegocioException(
+                    "Não é possível desativar categoria com produtos ativos vinculados."
+            );
+        }
 
         categoria.setAtivo(false);
 
