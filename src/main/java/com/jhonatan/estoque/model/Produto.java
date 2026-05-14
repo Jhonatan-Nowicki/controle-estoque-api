@@ -20,25 +20,25 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "O nome do produto é obrigatório")
     @Column(nullable = false)
     private String nome;
 
     private String descricao;
 
-    @NotBlank
+    @NotBlank(message = "O código SKU é obrigatório")
     @Column(nullable = false, unique = true)
     private String codigoSku;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "O preço é obrigatório")
+    @Positive(message = "O preço deve ser um valor positivo")
     @Column(nullable = false)
     private BigDecimal preco;
 
-    @Positive
+    @Positive(message = "A quantidade mínima deve ser maior que zero")
     private Integer quantidadeMinima;
 
-    @NotNull
+    @NotNull(message = "A categoria é obrigatória")
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;

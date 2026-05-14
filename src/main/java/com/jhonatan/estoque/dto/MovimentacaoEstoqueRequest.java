@@ -5,11 +5,11 @@ import jakarta.validation.constraints.Positive;
 
 public class MovimentacaoEstoqueRequest {
 
-    @NotNull
+    @NotNull(message = "O produto é obrigatório")
     private Long produtoId;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "A quantidade é obrigatória")
+    @Positive(message = "A quantidade deve ser maior que zero")
     private Integer quantidade;
 
     private String observacao;

@@ -19,7 +19,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "O nome da categoria é obrigatório")
     @Column(nullable = false, unique = true)
     private String nome;
 
