@@ -1,3 +1,6 @@
 spring:
   application:
     name: estoque-api
+
+  jpa:
+    open-in-view: false
