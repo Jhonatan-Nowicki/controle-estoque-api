@@ -190,7 +190,7 @@ http://localhost:8080/swagger-ui/index.html
 ## 1. Clonar repositório
 
 ```bash
-git clone https://github.com/SEU-USUARIO/estoque-api.git
+git clone https://github.com/Jhonatan-Nowicki/controle-estoque-api.git
 ```
 
 ---
@@ -198,7 +198,7 @@ git clone https://github.com/SEU-USUARIO/estoque-api.git
 ## 2. Entrar na pasta
 
 ```bash
-cd estoque-api
+cd controle-estoque-api
 ```
 
 ---
